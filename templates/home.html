@@ -134,6 +134,28 @@
             padding-right: 45px;
         }
 
+        /* ===== Flash reveal for inputs ===== */
+
+        /* ===== Flash reveal animation ===== */
+
+        .card,
+        .result-card,
+        .form-group,
+        .btn-predict {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .card.show,
+        .result-card.show,
+        .form-group.show,
+        .btn-predict.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
         .btn-predict {
             width: 100%;
             padding: 18px 32px;
@@ -559,6 +581,36 @@
             }
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const elements = document.querySelectorAll(
+                ".card, .result-card, .form-group, .btn-predict"
+            );
+
+            const observer = new IntersectionObserver((entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+                        const index = [...elements].indexOf(entry.target);
+
+                        setTimeout(() => {
+                            entry.target.classList.add("show");
+                        }, index * 150);
+
+                    } else {
+                        entry.target.classList.remove("show");
+                    }
+
+                });
+
+            }, { threshold: 0.2 });
+
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+
 </body>
 
 </html>

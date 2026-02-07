@@ -1,19 +1,19 @@
 from flask import Flask,request,jsonify,render_template
-#render_template searches templates in folder str so templates banaye baad hi render_template import karna
+
 import pickle
 import numpy as np
 import pandas as pd
 
 rf_regressor=pickle.load(open('models/rf_regressor.pkl','rb'))
 preprocessor=pickle.load(open('models/preprocessor.pkl','rb'))
-application=Flask(__name__)    #jaha flask hai uska path batata hai
+application=Flask(__name__)   
 
-app=application   #deployement mein use hota hai application
+app=application  
 
 @app.route('/')
 def index():
     return render_template('index.html')
-#Area depends on our csv and 'area' depends on the name we give in html we do this to convert into 2d array
+
 @app.route('/predict_data', methods=['GET','POST'])
 def predict():
     if request.method=='POST':
@@ -46,6 +46,6 @@ def predict():
     else:
         return render_template('home.html')
 
-if __name__=="__main__":   #yeh batata hai ki yeh hamare application ka base hai server chalu karne ke liye
-    app.run(debug=True)     #auto reload ke liye ddebug=true
+if __name__=="__main__":  
+    app.run(debug=True)     
 

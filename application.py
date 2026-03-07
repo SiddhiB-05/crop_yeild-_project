@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask,request,jsonify,render_template
+
+import pickle
 import numpy as np
 import pandas as pd
 import os
@@ -20,19 +22,15 @@ def load_models():
             filename="rf_regressor.pkl"
         )
 
-        preprocessor_path = hf_hub_download(
-            repo_id="Annabeth08/crop-yield-model",
-            filename="preprocessor.pkl"
-        )
+rf_regressor=pickle.load(open('models/rf_regressor.pkl','rb'))
+preprocessor=pickle.load(open('models/preprocessor.pkl','rb'))
+application=Flask(__name__)   
 
-        rf_regressor = pickle.load(open(model_path, "rb"))
-        preprocessor = pickle.load(open(preprocessor_path, "rb"))
-
+app=application  
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route('/predict_data', methods=['GET','POST'])
 def predict():
@@ -70,6 +68,8 @@ def predict():
     else:
         return render_template('home.html')
 
+if __name__=="__main__":  
+    app.run(debug=True)     
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))

@@ -1,136 +1,146 @@
 # 🌾 Crop Yield Prediction System
 
-A Machine Learning–based web application that predicts **crop yield** using environmental and agricultural factors such as region, crop type, rainfall, temperature, pesticide usage, and year.  
-The system compares multiple regression models and deploys the **Random Forest Regressor** using **Flask** for real-time predictions.
+A **Machine Learning–based web application** that predicts **crop yield** using environmental and agricultural factors such as **region, crop type, rainfall, temperature, pesticide usage, and year**.
+
+The system trains and evaluates multiple regression models and deploys the **Random Forest Regressor** using **Flask** for real-time predictions through a web interface.
 
 ---
 
-## 📌 Project Overview
+# 🚀 Live Demo
 
-Agriculture is highly dependent on climate and environmental conditions. Accurate crop yield prediction can help farmers, researchers, and policymakers make informed decisions.
+🔗 **Try the Application:**
+https://annabeth08-crop-yield-prediction.hf.space
+
+---
+
+# 📌 Project Overview
+
+Agriculture is highly dependent on environmental and climatic conditions. Predicting crop yield accurately helps **farmers, researchers, and policymakers** make better decisions related to production planning, resource allocation, and food security.
 
 This project:
-- Trains multiple regression models on historical crop data
-- Compares their performance using standard regression metrics
-- Deploys the best-performing model using Flask
-- Provides predictions through a web interface and REST API
+
+* Trains multiple regression models on historical crop data
+* Evaluates models using standard regression metrics
+* Selects the best-performing model for deployment
+* Deploys the model using **Flask**
+* Provides predictions through a **web interface and REST API**
 
 ---
 
-## ⚙️ Tech Stack
+# ⚙️ Tech Stack
 
-- Python  
-- Flask  
-- Scikit-learn  
-- Pandas  
-- NumPy  
-- Pickle  
-- HTML / CSS  
+* **Python**
+* **Flask**
+* **Scikit-learn**
+* **Pandas**
+* **NumPy**
+* **Pickle**
+* **HTML / CSS**
 
 ---
 
-## 📊 Input Features
+# 📊 Input Features
 
 The model predicts crop yield based on the following features:
 
-| Feature | Description |
-|-------|------------|
-| Area | Country or region |
-| Item | Crop type |
-| Year | Year of production |
+| Feature                       | Description                  |
+| ----------------------------- | ---------------------------- |
+| Area                          | Country or region            |
+| Item                          | Crop type                    |
+| Year                          | Year of production           |
 | average_rain_fall_mm_per_year | Average annual rainfall (mm) |
-| pesticides_tonnes | Pesticide usage (tonnes) |
-| avg_temp | Average temperature (°C) |
+| pesticides_tonnes             | Pesticide usage (tonnes)     |
+| avg_temp                      | Average temperature (°C)     |
 
 ---
 
-## 🧠 Machine Learning Models Used
+# 🧠 Machine Learning Models Used
 
-Three regression models were trained and evaluated:
-
----
-
-### 🌳 Decision Tree Regressor
-
-**Training Set Performance**
-- Root Mean Squared Error (RMSE): **32,344.3632**
-- Mean Absolute Error (MAE): **13,635.1413**
-- R² Score: **0.8536**
-
-**Test Set Performance**
-- Root Mean Squared Error (RMSE): **39,329.3611**
-- Mean Absolute Error (MAE): **18,050.2551**
-- R² Score: **0.7866**
-
-This model provides a strong baseline but tends to overfit and shows reduced generalization on unseen data.
+Three regression models were trained and evaluated.
 
 ---
 
-### 🌲 Random Forest Regressor (Final Model)
+## 🌲 Random Forest Regressor (Final Model)
 
-**Training Set Performance**
-- Root Mean Squared Error (RMSE): **4,356.9135**
-- Mean Absolute Error (MAE): **2,303.5415**
-- R² Score: **0.9973**
+### Training Performance
 
-**Test Set Performance**
-- Root Mean Squared Error (RMSE): **12,980.9416**
-- Mean Absolute Error (MAE): **6,579.0735**
-- R² Score: **0.9768**
+* **RMSE:** 4,356.9135
+* **MAE:** 2,303.5415
+* **R² Score:** 0.9973
 
-✅ **Random Forest Regressor was selected for deployment** due to:
-- High prediction accuracy
-- Strong generalization on test data
-- Reduced overfitting compared to Decision Tree
-- Robust performance across multiple features
+### Test Performance
 
----
+* **RMSE:** 12,980.9416
+* **MAE:** 6,579.0735
+* **R² Score:** 0.9768
 
-### 🚀 XGBoost Regressor
+✅ **Random Forest Regressor was selected for deployment** because it offers:
 
-**Training Set Performance**
-- Root Mean Squared Error (RMSE): **415.9188**
-- Mean Absolute Error (MAE): **203.4589**
-- R² Score: **1.0000**
-
-**Test Set Performance**
-- Root Mean Squared Error (RMSE): **10,301.8674**
-- Mean Absolute Error (MAE): **3,697.7668**
-- R² Score: **0.9854**
-
-Although XGBoost achieved the highest test accuracy, Random Forest was chosen for deployment due to its interpretability, stability, and simpler production setup.
+* High prediction accuracy
+* Strong generalization ability
+* Reduced overfitting compared to Decision Tree
+* Stable performance across multiple features
 
 ---
 
-## 🏗️ Project Structure
+## 🚀 XGBoost Regressor
 
+### Training Performance
+
+* **RMSE:** 415.9188
+* **MAE:** 203.4589
+* **R² Score:** 1.0000
+
+### Test Performance
+
+* **RMSE:** 10,301.8674
+* **MAE:** 3,697.7668
+* **R² Score:** 0.9854
+
+Although **XGBoost achieved the highest test accuracy**, Random Forest was selected because of its **simpler deployment, stability, and interpretability**.
+
+---
+
+# 🏗️ Project Structure
+
+```
+crop-yield-prediction
+│
 ├── models/
-│ ├── rf_regressor.pkl
-│ └── preprocessor.pkl
+│   ├── rf_regressor.pkl
+│   └── preprocessor.pkl
+│
 ├── templates/
-│ ├── index.html
-│ └── home.html
+│   ├── index.html
+│   └── home.html
+│
 ├── application.py
 ├── requirements.txt
 └── README.md
-
+```
 
 ---
 
-## 🔌 Flask API Endpoints
+# 🔌 Flask API Endpoints
 
-### 🏠 Home Page
+## 🏠 Home Page
+
+```
 GET /
+```
 
-Renders the main user interface.
+Renders the main web interface for the application.
 
 ---
 
-### 🔮 Predict Crop Yield
+## 🔮 Predict Crop Yield
+
+```
 POST /predict_data
+```
 
+### Request Body (JSON)
 
-**Request Body (JSON):**
 ```json
 {
   "area": "India",
@@ -140,40 +150,72 @@ POST /predict_data
   "pesticides": 55,
   "avg_temp": 24.5
 }
-Response (JSON):
+```
 
+### Response (JSON)
+
+```json
 {
   "prediction": 31245,
   "crop": "Wheat",
   "region": "India"
 }
-▶️ How to Run the Project
-Clone the repository
+```
 
+---
+
+# ▶️ How to Run the Project
+
+### 1️⃣ Clone the Repository
+
+```
 git clone https://github.com/yourusername/crop-yield-prediction.git
-Install dependencies
+```
 
+### 2️⃣ Navigate to Project Folder
+
+```
+cd crop-yield-prediction
+```
+
+### 3️⃣ Install Dependencies
+
+```
 pip install -r requirements.txt
-Run the Flask application
+```
 
-python app.py
-Open your browser and visit:
+### 4️⃣ Run the Flask Application
 
+```
+python application.py
+```
+
+### 5️⃣ Open in Browser
+
+```
 http://127.0.0.1:5000/
-📈 Conclusion
-The system successfully predicts crop yield using machine learning
+```
 
-Random Forest Regressor offers an optimal balance between accuracy and robustness
+---
 
-Flask enables easy deployment and real-time prediction
+# 📈 Conclusion
 
-The project can be extended for large-scale agricultural decision support systems
+This system successfully predicts **crop yield using machine learning techniques**.
 
-🌱 Future Improvements
-Add data visualization dashboards
+The **Random Forest Regressor** provides a strong balance between **accuracy, robustness, and stability**. By integrating the model with **Flask**, the system allows real-time predictions through a simple web interface.
 
-Deploy using Docker or cloud platforms
+This project demonstrates how **machine learning can assist agricultural decision-making and improve productivity forecasting**.
 
-Include real-time weather data APIs
+---
 
-Improve model explainability using SHAP or feature importance
+# 🌱 Future Improvements
+
+* Add **data visualization dashboards**
+* Deploy using **Docker or cloud platforms**
+* Integrate **real-time weather APIs**
+* Improve **model explainability using SHAP**
+* Support **more crops and regions**
+
+---
+
+If you found this project useful, feel free to ⭐ the repository.

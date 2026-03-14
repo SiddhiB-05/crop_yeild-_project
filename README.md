@@ -208,14 +208,18 @@ This project demonstrates how **machine learning can assist agricultural decisio
 
 ---
 
-# 🌱 Future Improvements
-
-* Add **data visualization dashboards**
-* Deploy using **Docker or cloud platforms**
-* Integrate **real-time weather APIs**
-* Improve **model explainability using SHAP**
-* Support **more crops and regions**
+🌱 Future Improvements
+Add data visualization dashboards
+Deploy using Docker or cloud platforms
+Integrate real-time weather APIs
+Improve model explainability using SHAP
+Support more crops and regions
 
 ---
+
+## 👩‍💻 Authors
+
+- **Siddhi Biyani** – Machine Learning, Backend, Deployment  
+- **Yash Pitroda** – Frontend Development  
 
 If you found this project useful, feel free to ⭐ the repository.
